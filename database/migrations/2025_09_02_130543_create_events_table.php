@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('location')->nullable();
             $table->text('description')->nullable();
-            $table->foreignId('user_id')->constrained('users');
-            $table->date('from');
-            $table->date('due')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->dateTime('from');
+            $table->dateTime('due')->nullable();
             $table->boolean('is_completed')->default(false);
             $table->boolean('is_favourite')->default(false);
+            $table->boolean('is_notified')->default(false);
             $table->timestamps();
         });
 

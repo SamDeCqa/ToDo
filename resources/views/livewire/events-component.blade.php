@@ -13,8 +13,24 @@
         @forelse ($events as $event)
         <div class="bg-gray-100 col-span-3 px-2 lg:px-4 py-3 lg:py-5 lg:w-[40rem] h-fit rounded-xl hover:shadow-md transition duration-500">
             <div class="flex justify-between">
-                <div>
+                <div class="flex gap-4">
                     <p class="text-gray-400 text-sm">Created {{$event->created_at->diffForHumans()}}</p>
+                @if($event->from > now())
+                    <p class="flex gap-1 text-amber-600 text-xs  items-center bg-amber-100 rounded-lg px-2 py-1 font-medium">
+                            <x-heroicon-o-bell-alert class="w-4 h-4"/>
+                            <span>Upcoming</span>
+                        </p>
+                @elseif($event->due < now())
+                    <p class="flex gap-1 text-green-600 text-xs  items-center bg-green-200 rounded-lg px-2 py-1 font-medium">
+                            <x-heroicon-o-check-badge class="w-4 h-4"/>
+                            <span>Completed</span>
+                        </p>
+                @else
+                        <p class="flex gap-1 text-indigo-600 text-xs  items-center bg-indigo-200 rounded-lg px-2 py-1 font-medium">
+                            <x-heroicon-o-arrow-path class="w-4 h-4"/>
+                            <span>On Going</span>
+                        </p>
+                @endif
                 </div>
                 <p class="text-blue-600 text-sm font-semibold cursor-pointer"
                      @click="selectedEvent=@js($event);eventDetails = true">See details</p>
@@ -68,10 +84,10 @@
             </div>
         </div>
         @empty
-        <div>
-            <div class="p-4 bg-blue-200 rounded-xl text-blue-600">
+        <div class="w-[60rem]">
+            <div class="p-4 bg-blue-200 rounded-xl text-blue-600 w-[40rem] mx-auto">
                 <p class="text-3xl text-center text-blue-600 font-medium">Empty</p>
-                <x-heroicon-o-information-circle class="w-12 h-12 mx-auto my-4" />
+                <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
                 <p class="text-xl text-center">No Events Yet</p>
 
             </div>

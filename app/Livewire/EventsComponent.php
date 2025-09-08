@@ -13,6 +13,7 @@ class EventsComponent extends Component
     public $location;
     public $description;
     public $is_favourite;
+    public $status;
 
     public function delete (Event $event) {
        $event -> delete();
@@ -27,6 +28,7 @@ class EventsComponent extends Component
 
     }
 
+
     public function toggleFavourite (Event $event) {
         $event->is_favourite =! $event->is_favourite;
         $event->save();
@@ -38,6 +40,7 @@ class EventsComponent extends Component
                         ->where('name', 'LIKE', '%'.$this->searchTerm.'%')
                         ->orderBy('created_at', 'DESC')
                         ->paginate(10);
+
         return view('livewire.events-component',compact('events'));
     }
 }

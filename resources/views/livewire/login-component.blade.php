@@ -14,7 +14,7 @@
             <input type="text" wire:model="usernameOrEmail" class="border-2 border-gray-200 rounded-2xl w-full lg:w-96 h-12 px-4 focus:outline-none focus:border-indigo-500" placeholder="Username or Email">
             <input type="password" wire:model="password" class="border-2 border-gray-200 rounded-2xl w-full lg:w-96 h-12 px-4 focus:outline-none focus:border-indigo-500" placeholder="Password">
             <div class="w-full flex justify-end mb-4">
-                <a href="#" class="text-xs text-blue-500 font-bold">Forgot Password</a>
+                <a href="{{ route('forgot-password') }}" class="text-xs text-blue-500 font-bold">Forgot Password</a>
             </div>
             <div class="flex gap-3 pl-4">
                 <input type="checkbox" wire:model="remember">

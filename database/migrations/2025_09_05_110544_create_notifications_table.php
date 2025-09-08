@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('memos', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->text('info');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->boolean('is_favourite')->default(false);
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('memos');
+        Schema::dropIfExists('notifications');
     }
 };

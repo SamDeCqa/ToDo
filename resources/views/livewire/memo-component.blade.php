@@ -7,7 +7,7 @@
     </div>
 
     <div class="my-4">
-        {{$memos->links()}}
+      <!-- HAPA NILIWEKA LINKS ZA PAGINATION -->
     </div>
 
     <div class="grid lg:grid-cols-7 gap-4">
@@ -54,12 +54,19 @@
             </div>
         </div>
         @empty
-        <p>No memos found.</p>
+        <div class="w-[60rem]">
+            <div class="p-4 bg-blue-200 rounded-xl text-blue-600 w-[40rem] mx-auto">
+                <p class="text-3xl text-center text-blue-600 font-medium">Empty</p>
+                <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
+                <p class="text-xl text-center">No Memos Yet</p>
+
+            </div>
+        </div>
         @endforelse
     </div>
 
     <div class="my-4 w-3/4">
-        {{$memos->links(data : ['scrollTo' => false])}}
+              <!-- HAPA NILIWEKA LINKS ZA PAGINATION -->
     </div>
 
     <!-- Details Modal -->

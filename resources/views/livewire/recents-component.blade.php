@@ -6,9 +6,24 @@
         @forelse ($events as $event)
         <div class="bg-gray-100 px-2 lg:px-4 py-3 lg:py-5 lg:w-[40rem] lg:h-fit rounded-xl hover:shadow-md transition duration-500">
             <div class="flex justify-between">
-                <div>
-                    <p class="text-gray-400 text-sm">Created {{ $event->created_at->diffForHumans()}}</p>
-                    <p class="text-gray-700 font-semibold"></p>
+                <div class="flex justify-between w-full">
+                    <p class="text-gray-400 text-sm ">Created {{ $event->created_at->diffForHumans()}}</p>
+                    @if($event->from > now())
+                    <p class="flex gap-1 text-amber-600 text-xs  items-center bg-amber-100 rounded-lg px-2 py-1 font-medium">
+                            <x-heroicon-o-bell-alert class="w-4 h-4"/>
+                            <span>Upcoming</span>
+                        </p>
+                @elseif($event->due < now())
+                    <p class="flex gap-1 text-green-600 text-xs  items-center bg-green-200 rounded-lg px-2 py-1 font-medium">
+                            <x-heroicon-o-check-badge class="w-4 h-4"/>
+                            <span>Completed</span>
+                        </p>
+                @else
+                        <p class="flex gap-1 text-indigo-600 text-xs  items-center bg-indigo-200 rounded-lg px-2 py-1 font-medium">
+                            <x-heroicon-o-arrow-path class="w-4 h-4"/>
+                            <span>On Going</span>
+                        </p>
+                @endif
                 </div>
             </div>
 

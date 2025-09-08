@@ -24,7 +24,7 @@
                     class="w-24 h-24 rounded-full object-cover"
                     alt="Preview" @click="$refs.photoInput.click()" >
                 @else
-                <img src="{{ Auth::user()->profile_pic ? asset('storage/' . Auth::user()->profile_pic) : '../images/1.jpg' }}"
+                <img src="{{ Auth::user()->profile_pic ? asset('storage/' . Auth::user()->profile_pic) : '../images/profile_default.png' }}"
                     class="w-24 h-24 rounded-full object-cover"
                     alt="Profile" @click="$refs.photoInput.click()">
                 @endif

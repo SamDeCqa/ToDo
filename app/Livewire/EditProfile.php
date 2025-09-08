@@ -5,7 +5,6 @@ namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 
 class EditProfile extends Component
@@ -16,14 +15,15 @@ class EditProfile extends Component
 
     public function mount()
     {
-        $this->name  = auth()->user()->name;
-        $this->email = auth()->user()->email;
-        $this->phone = auth()->user()->phone;
+        $this->name  = Auth::user()->name;
+        $this->email = Auth::user()->email;
+        $this->phone = Auth::user()->phone;
     }
 
     protected $rules = [
         'name' => 'required|min:3|string',
         'email' => 'required|email',
+        'photo' => 'image|max:5120',
         'phone' => ['required', 'regex:/^(\+\d{1,3}\s?\d{9}|0[67]\d{8})$/'],
         'password' => ['min:6' ,'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).+$/'],
         'passwordConfirmation' => 'same:password'

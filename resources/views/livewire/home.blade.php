@@ -1,11 +1,11 @@
 <div>
 
-    <div class="lg:flex justify-between">
+    <div class="lg:flex md:flex justify-between">
         <p class="text-2xl font-medium">Welcome, {{ Auth()->User()->name ??'Samwel'}}</p>
         <div class="flex justify-end sm:mt-4">
             <!-- <p class="justify-end">Sat, Aug 12 2025</p> -->
             <div class="flex gap-4">
-                <img src="{{asset('storage/'.Auth()->user()->profile_pic)}}" class="w-12 h-12 rounded-full" alt="Your Photo">
+                <img src="{{ Auth::user()->profile_pic ? asset('storage/' . Auth::user()->profile_pic) : '../images/profile_default.png' }}" class="w-12 h-12 border border-gray-500 rounded-full" alt="Your Photo">
                 <div class="flex-col text-sm">
                     <p class="text-gray-800">{{ Auth()->User()->name ??'Samwel'}}</p>
                     <p class="text-gray-400">{{ Auth()->User()->email ??'samwel@gmail.com'}}</p>

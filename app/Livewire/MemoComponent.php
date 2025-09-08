@@ -38,7 +38,7 @@ class MemoComponent extends Component
         $memos = Memo::where('user_id', Auth::id())
                     ->where('title', 'LIKE', '%'.$this->searchTerm.'%')
                      ->latest()
-                     ->paginate(10);
+                     ->get();
         return view('livewire.memo-component',compact('memos'));
     }
 }

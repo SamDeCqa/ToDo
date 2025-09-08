@@ -58,28 +58,28 @@
         <nav>
             <p class="px-2 pt-4 font-bold text-blue-600 text-2xl mb-6">To-Do App</p>
             <ul class="px-6 space-y-4 text-blue-500 font-medium">
-                <li class="px-4 py-2 rounded-xl hover:bg-blue-200" wire:current="bg-blue-300">
+                <li class="px-4 py-2 rounded-xl {{request()->routeIs('home') ? 'bg-blue-300 text-blue-700' : 'hover:bg-blue-100'}}">
                     <a href="{{route('home')}}" class="flex gap-2 items-center" wire:navigate>
                         <x-heroicon-o-home class="w-8 h-8" />
                         Home
                     </a>
                 </li>
 
-                <li class="px-4 py-2 rounded-xl hover:bg-blue-200" wire:current="bg-blue-300">
+                <li class="px-4 py-2 rounded-xl {{request()->routeIs('tasks') ? 'bg-blue-300 text-blue-700' : 'hover:bg-blue-100'}}">
                     <a href="{{route('tasks')}}" class="flex gap-2 items-center" wire:navigate>
                         <x-heroicon-o-briefcase class="w-8 h-8" />
                         Tasks
                     </a>
                 </li>
 
-                <li class="px-4 py-2 rounded-xl hover:bg-blue-200">
+                <li class="px-4 py-2 rounded-xl {{request()->routeIs('support') ? 'bg-blue-300 text-blue-700' : 'hover:bg-blue-100'}}">
                     <a href="" class="flex gap-2 items-center" wire:navigate>
                         <x-heroicon-o-wrench-screwdriver class="w-8 h-8" />
                         Support
                     </a>
                 </li>
 
-                <li class="px-4 py-2 rounded-xl hover:bg-blue-200">
+                <li class="px-4 py-2 rounded-xl {{request()->routeIs('settings') ? 'bg-blue-300 text-blue-700' : 'hover:bg-blue-100'}}">
                     <a href="{{ route('settings') }}" class="flex gap-2 items-center" wire:navigate>
                         <x-heroicon-o-cog class="w-8 h-8" />
                         Settings
@@ -100,29 +100,45 @@
     <nav class="block md:hidden fixed bottom-0 w-full h-fit py-2 px-4 bg-white z-30">
         <ul class="text-xs flex justify-between text-blue-400 font-medium">
             <li>
-                <a href="{{route('home')}}" class="grid gap-2 items-center">
+                <a href="{{route('home')}}" class="grid gap-2 items-center{{ request()->routeIs('home') ? 'fill-blue-400 text-blue-500' : 'text-blue-400'}}">
+                    @if (request()->routeIs('home'))
+                    <x-heroicon-s-home class="w-6 h-6" />
+                    @else
                     <x-heroicon-o-home class="w-6 h-6" />
+                    @endif
                     Home
                 </a>
             </li>
 
             <li>
                 <a href="{{route('tasks')}}" class="grid gap-2 items-center">
+                    @if (request()->routeIs('tasks'))
+                    <x-heroicon-s-briefcase class="w-6 h-6" />
+                    @else
                     <x-heroicon-o-briefcase class="w-6 h-6" />
+                    @endif
                     Tasks
                 </a>
             </li>
 
             <li>
-                <a href="" class="grid gap-2 items-center">
+                <a href="{{route('support')}}" class="grid gap-2 items-center">
+                    @if (request()->routeIs('support'))
+                    <x-heroicon-s-wrench-screwdriver class="w-6 h-6" />
+                    @else
                     <x-heroicon-o-wrench-screwdriver class="w-6 h-6" />
+                    @endif
                     Support
                 </a>
             </li>
 
             <li>
                 <a href="{{ route('settings') }}" class="grid gap-2 items-center">
+                    @if (request()->routeIs('settings'))
+                    <x-heroicon-s-cog class="w-6 h-6" />
+                    @else
                     <x-heroicon-o-cog class="w-6 h-6" />
+                    @endif
                     Settings
                 </a>
             </li>

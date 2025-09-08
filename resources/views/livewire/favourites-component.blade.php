@@ -35,10 +35,10 @@
             </div>
         </div>
         @empty
-        <div>
-            <div class="p-4 bg-blue-200 rounded-xl text-blue-600">
+        <div class="flex justify-center items-center">
+            <div class="p-4 bg-blue-200 rounded-xl text-blue-600 w-3/4">
+                <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
                 <p class="text-3xl text-center text-blue-600 font-medium">Empty</p>
-                <x-heroicon-o-information-circle class="w-12 h-12 mx-auto my-4" />
                 <p class="text-xl text-center">No Memos you made Favourites</p>
 
             </div>

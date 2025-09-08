@@ -19,11 +19,12 @@ class Event extends Model
         'due',
         'is_completed',
         'is_favourite',
+        'is_notified',
     ];
 
     protected $casts = [
-        'from' => 'date', 
-        'due' => 'date', 
+        'from' => 'datetime', 
+        'due' => 'datetime', 
     ];
 
     public function users(){
