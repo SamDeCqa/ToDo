@@ -17,7 +17,7 @@ use App\Livewire\{
 Route::get('/', LoginComponent::class)->name('login');
 Route::get('register', RegistrationComponent::class)->name('register');
 Route::get('forgot-password', ForgotPassword::class)->name('forgot-password');
-Route::get('reset-password', ResetPassword::class)->name('reset-password');
+Route::get('reset-password/{user_id}/{token}', ResetPassword::class)->name('reset-password');
 
 Route::middleware('auth')->group(function(){
     Route::get('home', Home::class)->name('home');

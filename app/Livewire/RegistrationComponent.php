@@ -36,6 +36,6 @@ class RegistrationComponent extends Component
 
     public function render()
     {
-        return view('livewire.registration-component');
+        return view('livewire.auth.registration-component');
     }
 }

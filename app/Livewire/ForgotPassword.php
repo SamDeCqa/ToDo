@@ -4,7 +4,9 @@ namespace App\Livewire;
 
 use App\Models\User;
 use App\Notifications\ForgotPasswordNotification;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class ForgotPassword extends Component
@@ -18,7 +20,15 @@ class ForgotPassword extends Component
 
         $user = User::where('email', $this->email)->first();
 
-        Notification::send($user, new ForgotPasswordNotification);
+        $token = Str::random(64);
+
+        DB::table('password_resets')->updateOrInsert([
+            'token' => $token,
+            'email' => $this->email,
+            'created_at' => now()
+        ]);
+
+        Notification::send($user, new ForgotPasswordNotification($token, $user));
         
         $this->reset();
 
@@ -27,6 +37,6 @@ class ForgotPassword extends Component
 
     public function render()
     {
-        return view('livewire.forgot-password');
+        return view('livewire.auth.forgot-password');
     }
 }
