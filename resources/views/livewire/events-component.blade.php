@@ -1,4 +1,10 @@
 <div>
+    <div class="flex mt-6 gap-8 md:justify-center">
+                <input type="text" placeholder="Search Events..." wire:model.live.debounce.300ms="searchTerm"
+                        class="bg-gray-200 border lg:w-96 border-gray-300 px-4 rounded-full h-12  md:h-14 focus:outline-none focus:border-2 focus:border-blue-500">
+                <x-heroicon-o-magnifying-glass class="w-12 h-12 p-2 bg-gray-100 rounded-full"/>
+    </div>
+
     <div class="flex justify-between mt-4">
         <p class="text-3xl font-bold">Events</p>
         <div class="flex gap-4">
@@ -84,14 +90,13 @@
             </div>
         </div>
         @empty
-        <div class="w-[60rem]">
-            <div class="p-4 bg-blue-200 rounded-xl text-blue-600 w-[40rem] mx-auto">
-                <p class="text-3xl text-center text-blue-600 font-medium">Empty</p>
-                <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
-                <p class="text-xl text-center">No Events Yet</p>
-
+        <div class="w-full bg-blue-100 max-w-md lg:max-w-5xl mx-auto">
+                <div class="p-4 rounded-xl text-center w-full max-w-2xl mx-auto">
+                    <p class="text-3xl font-medium">Empty</p>
+                    <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
+                    <p class="text-xl mt-4">No Events Yet</p>
+                </div>
             </div>
-        </div>
         @endforelse
 
 

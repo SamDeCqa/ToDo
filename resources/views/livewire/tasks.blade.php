@@ -1,10 +1,6 @@
 <div>
 
-            <div class="flex mt-6 gap-8 md:justify-center">
-                <input type="text" placeholder="Search tasks..." wire:model="searchTerm"
-                        class="bg-gray-200 border lg:w-96 border-gray-300 px-4 rounded-full h-12  md:h-14 focus:outline-none focus:border-2 focus:border-blue-500">
-                <x-heroicon-o-magnifying-glass class="w-12 h-12 p-2 bg-gray-100 rounded-full"/>
-            </div>
+            
 
     
     

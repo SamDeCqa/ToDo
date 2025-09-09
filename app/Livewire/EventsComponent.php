@@ -36,8 +36,18 @@ class EventsComponent extends Component
 
     public function render()
     {
+        // $events = Event::where('user_id', Auth::id())
+        //                 ->where('name', 'LIKE', '%'.$this->searchTerm.'%')
+        //                 ->orWhere('location', 'LIKE', '%'.$this->searchTerm.'%')
+        //                 ->orWhere('from', 'LIKE', '%'.$this->searchTerm.'%')
+        //                 ->orderBy('created_at', 'DESC')
+        //                 ->paginate(10);
         $events = Event::where('user_id', Auth::id())
-                        ->where('name', 'LIKE', '%'.$this->searchTerm.'%')
+                        ->where(function ($query){
+                            $query->where('name', 'LIKE', '%'.$this->searchTerm.'%')
+                            ->orWhere('location', 'LIKE', '%'.$this->searchTerm.'%')
+                            ->orWhere('from', 'LIKE', '%'.$this->searchTerm.'%');
+                        })
                         ->orderBy('created_at', 'DESC')
                         ->paginate(10);
 
