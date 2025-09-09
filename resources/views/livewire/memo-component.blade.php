@@ -9,7 +9,7 @@
     <div class="flex justify-between mt-4">
         <p class="text-3xl font-bold">Memos</p>
         <div class="flex gap-4">
-            <button type="button" class="bg-blue-600 hover:bg-blue-700 w-32 h-12 rounded-lg text-white font-semibold transition duration-300">New Memo</button>
+            <a href="{{ route('create-memo') }}" class="bg-blue-600 hover:bg-blue-700 w-32 py-4 text-center items-center rounded-lg text-white font-semibold transition duration-300">New Memo</a>
         </div>
     </div>
 
@@ -51,7 +51,8 @@
                      @endif
                 </button>
                 <div>
-                    <button class="hover:bg-blue-100 p-2 rounded-full text-blue-400 hover:text-blue-500 transition duration-300">
+                    <button class="hover:bg-blue-100 p-2 rounded-full text-blue-400 hover:text-blue-500 transition duration-300"
+                            @click="selectedMemo=@js($memo);editMemo = true">
                         <x-heroicon-o-pencil class="w-5 h-5" />
                     </button>
                     <button class="hover:bg-red-100 p-2 rounded-full text-red-400 hover:text-red-500 transition duration-300" @click="selectedMemo = { id: '{{$memo->id}}', name: '{{$memo->title}}'};showDeleteMemo = true">
@@ -104,5 +105,34 @@
                 <button class="border-2 bg-red-500 text-white font-bold rounded-xl w-32 h-12 hover:bg-red-600" @click="$wire.delete(selectedMemo.id); showDeleteMemo = false">Delete</button>
             </div>
         </div>
+    </div>
+
+    <!-- Edit Memo -->
+    <div class="fixed overlay backdrop-blur-xs inset-0 z-40 w-full flex h-full justify-center items-center bg-opacity-75" x-show="editMemo" x-cloak x-transition.duration.300ms>
+        <div class="relative p-4 rounded-2xl bg-[#FDFDFD] w-64 lg:w-96 h-fit mt-4 z-50" @click.outside="editMemo = false">
+            <form wire:submit.prevent="edit" class="space-y-6">
+                <p class="text-xl font-semibold text-blue-600">Edit Memo</p>
+                <div class="grid">
+                    <label for="">Name:</label>
+                    <input wire:model="title" type="text" x-model="selectedMemo.title" class="px-4 border-2 h-12 border-gray-400 rounded-xl focus:outline-none focus:border-blue-400">
+                </div>
+
+                <div class="grid">
+                    <label for="">About</label>
+                    <textarea wire:model="info" name="" rows="5" x-model="selectedMemo.info" id="" class="px-4 border-2 border-gray-400 rounded-xl focus:outline-none focus:border-blue-400"></textarea>
+                </div>
+
+                <div class="flex justify-between">
+                    <button class="flex gap-1 items-center border-2 border-red-500 rounded-xl w-32 justify-center text-red-500 hover:bg-red-500 hover:text-white transition duration-300 font-medium" @click="editEvent = false">
+                        <x-heroicon-o-x-circle class="w-5 h-5"/>
+                        Cancel
+                    </button>
+                    
+                    <button type="submit" class="flex gap-1 items-center bg-blue-500 text-white font-medium w-32 py-1 justify-center rounded-xl active:scale-95 transition duration-300" @click="editEvent = false">
+                        <x-heroicon-o-check class="w-5 h-5"/>
+                        Save
+                    </button>
+                </div>
+            </form>
     </div>
 </div>

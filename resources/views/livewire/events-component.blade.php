@@ -8,7 +8,7 @@
     <div class="flex justify-between mt-4">
         <p class="text-3xl font-bold">Events</p>
         <div class="flex gap-4">
-            <button type="button" class="bg-blue-600 hover:bg-blue-700 w-32 h-12 rounded-lg text-white font-semibold transition duration-300">New Event</button>
+            <a href="{{ route('create-event') }}" class="bg-blue-600 hover:bg-blue-700 w-32 py-4 text-center rounded-lg text-white font-semibold transition duration-300">New Event</a>
         </div>
     </div>
     <div class="my-4">
@@ -79,7 +79,8 @@
                 </button>
 
                 <div>
-                    <button class="hover:bg-blue-100 p-2 rounded-full text-blue-400 hover:text-blue-500 transition duration-300">
+                    <button class="hover:bg-blue-100 p-2 rounded-full text-blue-400 hover:text-blue-500 transition duration-300"
+                            @click="selectedEvent=@js($event);editEvent = true">
                         <x-heroicon-o-pencil class="w-5 h-5" />
                     </button>
                     <button class="hover:bg-red-100 p-2 rounded-full text-red-400 hover:text-red-500 transition duration-300"
@@ -136,6 +137,58 @@
                 <p class="font-semibold text-blue-500">Description:</p>
                 <span class="font-thin text-gray-800" x-text="selectedEvent.description"></span>
             </div>
+        </div>
+     </div>
+
+     <!-- Edit Event -->
+     <div class="fixed inset-0 backdrop-blur-xs opacity-100 z-40 w-full h-full flex justify-center items-center" x-show="editEvent" x-cloak x-transition.duration.500ms>
+        
+        <div class="relative flex flex-col z-50 bg-white p-4 w-fit" x-show="editEvent" @click.outside="editEvent = false">
+            <div class="flex justify-end">
+                <x-heroicon-s-x-mark class="w-8 h-8 text-gray-600 cursor-pointer" @click="editEvent = false" />
+            </div>
+
+            <form wire:submit.prevent="edit" class="space-y-6">
+                <p class="text-xl font-semibold text-blue-600">Edit Event</p>
+                <div class="grid">
+                    <label for="">Event's Name</label>
+                    <input wire:model="name" type="text" x-model="selectedEvent.name" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                </div>
+    
+                <div class="grid">
+                    <label for="">Location</label>
+                    <input wire:model="location" type="text" x-model="selectedEvent.location" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                </div>
+    
+                <div class="flex gap-4">
+                    <div class="grid">
+                        <label for="">From:</label>
+                        <input wire:model="from" type="datetime-local" x-model="selectedEvent.from" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div class="grid">
+                        <label for="">Ends:</label>
+                        <input wire:model="due" type="datetime-local" x-model="selectedEvent.due" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                    </div>
+                </div>
+    
+                <div class="grid">
+                    <label for="">Description</label>
+                    <textarea wire:model="description" type="text" rows="5" x-model="selectedEvent.description" class="px-4 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500"></textarea>
+                </div>
+    
+                <div class="flex justify-between">
+                    <button class="flex gap-1 items-center border-2 border-red-500 rounded-xl w-32 justify-center text-red-500 hover:bg-red-500 hover:text-white transition duration-300 font-medium" @click="editEvent = false">
+                        <x-heroicon-o-x-circle class="w-5 h-5"/>
+                        Cancel
+                    </button>
+                    
+                    <button type="submit" class="flex gap-1 items-center bg-blue-500 text-white font-medium w-32 py-1 justify-center rounded-xl active:scale-95 transition duration-300" @click="editEvent = false">
+                        <x-heroicon-o-check class="w-5 h-5"/>
+                        Save
+                    </button>
+                </div>
+
+            </form>
         </div>
      </div>
 </div>

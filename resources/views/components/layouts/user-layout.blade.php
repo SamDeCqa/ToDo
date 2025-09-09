@@ -12,6 +12,8 @@
                                     showFavourites : false,
                                     showEvents : false,
                                     showMemos : false,
+                                    editEvent : false,
+                                    editMemo : false,
                                     showDeleteEvent : false,
                                     showDeleteMemo : false,
                                     showNotif: true,

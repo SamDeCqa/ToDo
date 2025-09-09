@@ -22,6 +22,8 @@ Route::get('reset-password/{user_id}/{token}', ResetPassword::class)->name('rese
 Route::middleware('auth')->group(function(){
     Route::get('home', Home::class)->name('home');
     Route::get('tasks', Tasks::class)->name('tasks');
+    Route::get('event/create', CreateEvent::class)->name('create-event');
+    Route::get('memo/create', CreateMemo::class)->name('create-memo');
     Route::get('support', SupportComponent::class)->name('support');
     Route::get('settings', SettingsComponent::class)->name('settings');
     Route::get('profile', EditProfile::class)->name('profile');
