@@ -37,7 +37,7 @@ class EventNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->subject('Upcoming Event Reminder')
-            ->line('Reminder: '.$this->event['name'].' will start soon.')
+            ->line('We would like to inform you that '.$this->event['name'].' will start soon within six hours.')
             ->line('Start Time: '.$this->event['from']);
     }
 
