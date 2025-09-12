@@ -4,7 +4,7 @@
 
         <!-- CARD1 -->
         @forelse ($memos as $memo)
-        <div class="bg-gray-100 px-2 lg:px-4 py-3 lg:py-5 lg:w-[40rem] lg:h-fit rounded-xl hover:shadow-md transition duration-500">
+        <div class="bg-gray-100 px-2 lg:px-4 py-3 lg:py-5 w-96 lg:w-[40rem] lg:h-fit rounded-xl hover:shadow-md transition duration-500">
             <div class="flex justify-between">
                 <div>
                     <p class="text-gray-400 text-sm">Created {{ $memo->created_at->diffForHumans()}}</p>
@@ -35,8 +35,8 @@
             </div>
         </div>
         @empty
-        <div class="flex justify-center items-center">
-            <div class="p-4 bg-blue-200 rounded-xl text-blue-600 w-3/4">
+        <div class="">
+            <div class="p-6 bg-blue-200 rounded-xl text-blue-600 w-full">
                 <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
                 <p class="text-3xl text-center text-blue-600 font-medium">Empty</p>
                 <p class="text-xl text-center">No Memos you made Favourites</p>

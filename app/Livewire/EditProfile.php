@@ -40,7 +40,10 @@ class EditProfile extends Component
         Auth::user()->name  = $this->name;
         Auth::user()->email = $this->email;
         Auth::user()->phone = $this->phone;
-        Auth::user()->password = $this->password;
+        if($this->password){
+
+            Auth::user()->password = $this->password;
+        }
         
 
         Auth::user()->save();

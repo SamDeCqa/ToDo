@@ -1,4 +1,4 @@
-<div>
+<div class="w-full pb-24">
     <div class="flex mt-6 gap-8 md:justify-center">
                 <input type="text" placeholder="Search Events..." wire:model.live.debounce.300ms="searchTerm"
                         class="bg-gray-200 border lg:w-96 border-gray-300 px-4 rounded-full h-12  md:h-14 focus:outline-none focus:border-2 focus:border-blue-500">
@@ -80,7 +80,7 @@
 
                 <div>
                     <button class="hover:bg-blue-100 p-2 rounded-full text-blue-400 hover:text-blue-500 transition duration-300"
-                            @click="selectedEvent=@js($event);editEvent = true">
+                            @click="$wire.setEvent({{ $event->id }}); editEvent = true">
                         <x-heroicon-o-pencil class="w-5 h-5" />
                     </button>
                     <button class="hover:bg-red-100 p-2 rounded-full text-red-400 hover:text-red-500 transition duration-300"
@@ -91,7 +91,7 @@
             </div>
         </div>
         @empty
-        <div class="w-full bg-blue-100 max-w-md lg:max-w-5xl mx-auto">
+        <div class="w-full lg:w-[100rem] bg-blue-100 max-w-md lg:max-w-7xl mx-auto">
                 <div class="p-4 rounded-xl text-center w-full max-w-2xl mx-auto">
                     <p class="text-3xl font-medium">Empty</p>
                     <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
@@ -143,37 +143,52 @@
      <!-- Edit Event -->
      <div class="fixed inset-0 backdrop-blur-xs opacity-100 z-40 w-full h-full flex justify-center items-center" x-show="editEvent" x-cloak x-transition.duration.500ms>
         
-        <div class="relative flex flex-col z-50 bg-white p-4 w-fit" x-show="editEvent" @click.outside="editEvent = false">
+        <div class="relative flex flex-col z-50 bg-white p-4 w-full" x-show="editEvent" @click.outside="editEvent = false">
             <div class="flex justify-end">
                 <x-heroicon-s-x-mark class="w-8 h-8 text-gray-600 cursor-pointer" @click="editEvent = false" />
             </div>
 
-            <form wire:submit.prevent="edit" class="space-y-6">
+            <form wire:submit.prevent="edit({{ $eventId }})" class="space-y-6">
                 <p class="text-xl font-semibold text-blue-600">Edit Event</p>
                 <div class="grid">
                     <label for="">Event's Name</label>
-                    <input wire:model="name" type="text" x-model="selectedEvent.name" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                    <input wire:model="name" type="text" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                    @error('name')
+                        <p class="text-xs text-center text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
     
                 <div class="grid">
                     <label for="">Location</label>
-                    <input wire:model="location" type="text" x-model="selectedEvent.location" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                    <input wire:model="location" type="text" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                    @error('location')
+                        <p class="text-xs text-center text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
     
-                <div class="flex gap-4">
+                <div class="flex gap-1 lg:gap-4">
                     <div class="grid">
                         <label for="">From:</label>
-                        <input wire:model="from" type="datetime-local" x-model="selectedEvent.from" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                        <input wire:model="from" type="datetime-local" class="w-[11rem] text-sm h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                        @error('from') 
+                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="grid">
                         <label for="">Ends:</label>
-                        <input wire:model="due" type="datetime-local" x-model="selectedEvent.due" class="px-4 h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                        <input wire:model="due" type="datetime-local" class="w-[11rem] text-sm h-12 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500">
+                        @error('due')
+                            <p class="text-xs text-center text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
     
                 <div class="grid">
                     <label for="">Description</label>
-                    <textarea wire:model="description" type="text" rows="5" x-model="selectedEvent.description" class="px-4 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500"></textarea>
+                    <textarea wire:model="description" type="text" rows="5" class="px-4 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-blue-500"></textarea>
+                    @error('description')
+                        <p class="text-xs text-center text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
     
                 <div class="flex justify-between">

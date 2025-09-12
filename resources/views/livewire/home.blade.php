@@ -1,4 +1,4 @@
-<div>
+<div class="pb-24">
 
     <div class="lg:flex md:flex justify-between">
         <p class="text-2xl font-medium">Welcome, {{ Auth()->User()->name ??'Samwel'}}</p>

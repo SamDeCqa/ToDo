@@ -9,8 +9,7 @@ use Livewire\Component;
 class MemoComponent extends Component
 {
     public $searchTerm;
-    public $title;
-    public $info;
+    public $memoId, $title, $info;
     public $is_favourite;    
 
     public function delete (Memo $memo) {
@@ -19,13 +18,25 @@ class MemoComponent extends Component
         session()->flash('success', 'Memo Deleted');
     }
 
-    public function create () {
-        
+    public function setMemo (Memo $memo) {
+        $this->memoId = $memo->id;
+        $this->title = $memo->title;
+        $this->info = $memo->info;
     }
 
 
-    public function edit () {
+    public function edit (Memo $memo) {
+        $this->validate([
+            'title' => 'required|string',
+            'info' => 'nullable|string',
+        ]);
 
+        $memo->update([
+            'title' => $this->title,
+            'info' => $this->info,
+        ]);
+
+        session()->flash('success', 'Memo Updated!');
     }
 
     public function toggleFavourite (Memo $memo) {

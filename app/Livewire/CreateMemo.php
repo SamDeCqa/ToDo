@@ -30,6 +30,12 @@ class CreateMemo extends Component
 
         return redirect()->route('tasks');
     }
+
+    public function back() {
+        return redirect()->route('tasks');
+    }
+
+
     #[Layout('components.layouts.user-layout')]
     public function render()
     {

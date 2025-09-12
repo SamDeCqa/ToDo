@@ -4,7 +4,7 @@
 
         <!-- CARD1 -->
         @forelse ($events as $event)
-        <div class="bg-gray-100 px-2 lg:px-4 py-3 lg:py-5 lg:w-[40rem] lg:h-fit rounded-xl hover:shadow-md transition duration-500">
+        <div class="bg-gray-100 px-2 lg:px-4 py-3 lg:py-5 w-96 lg:w-[40rem] lg:h-fit rounded-xl hover:shadow-md transition duration-500">
             <div class="flex justify-between">
                 <div class="flex justify-between w-full">
                     <p class="text-gray-400 text-sm ">Created {{ $event->created_at->diffForHumans()}}</p>

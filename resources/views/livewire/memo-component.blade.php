@@ -1,4 +1,4 @@
-<div>
+<div class="pb-24">
     
     <div class="flex mt-6 gap-8 md:justify-center">
                 <input type="text" placeholder="Search Memos..." wire:model.live.debounce.300ms="searchTerm"
@@ -52,7 +52,7 @@
                 </button>
                 <div>
                     <button class="hover:bg-blue-100 p-2 rounded-full text-blue-400 hover:text-blue-500 transition duration-300"
-                            @click="selectedMemo=@js($memo);editMemo = true">
+                            @click="$wire.setMemo({{ $memo->id }});editMemo = true">
                         <x-heroicon-o-pencil class="w-5 h-5" />
                     </button>
                     <button class="hover:bg-red-100 p-2 rounded-full text-red-400 hover:text-red-500 transition duration-300" @click="selectedMemo = { id: '{{$memo->id}}', name: '{{$memo->title}}'};showDeleteMemo = true">
@@ -62,7 +62,7 @@
             </div>
         </div>
         @empty
-            <div class="w-full bg-blue-100 max-w-md lg:max-w-5xl mx-auto">
+            <div class="w-full lg:w-[100rem] bg-blue-100 max-w-md lg:max-w-7xl mx-auto">
                 <div class="p-4 rounded-xl text-center w-full max-w-2xl mx-auto">
                     <p class="text-3xl font-medium">Empty</p>
                     <x-heroicon-o-face-frown class="w-12 h-12 mx-auto my-4" />
@@ -109,26 +109,26 @@
 
     <!-- Edit Memo -->
     <div class="fixed overlay backdrop-blur-xs inset-0 z-40 w-full flex h-full justify-center items-center bg-opacity-75" x-show="editMemo" x-cloak x-transition.duration.300ms>
-        <div class="relative p-4 rounded-2xl bg-[#FDFDFD] w-64 lg:w-96 h-fit mt-4 z-50" @click.outside="editMemo = false">
-            <form wire:submit.prevent="edit" class="space-y-6">
+        <div class="relative p-4 rounded-2xl bg-[#FDFDFD] w-fit lg:w-96 h-fit mt-4 z-50" @click.outside="editMemo = false">
+            <form wire:submit.prevent="edit({{ $memoId }})" class="space-y-6">
                 <p class="text-xl font-semibold text-blue-600">Edit Memo</p>
                 <div class="grid">
                     <label for="">Name:</label>
-                    <input wire:model="title" type="text" x-model="selectedMemo.title" class="px-4 border-2 h-12 border-gray-400 rounded-xl focus:outline-none focus:border-blue-400">
+                    <input wire:model="title" type="text" class="px-4 border-2 h-12 border-gray-400 rounded-xl focus:outline-none focus:border-blue-400">
                 </div>
 
                 <div class="grid">
                     <label for="">About</label>
-                    <textarea wire:model="info" name="" rows="5" x-model="selectedMemo.info" id="" class="px-4 border-2 border-gray-400 rounded-xl focus:outline-none focus:border-blue-400"></textarea>
+                    <textarea wire:model="info" name="" rows="5" id="" class="px-4 border-2 border-gray-400 rounded-xl focus:outline-none focus:border-blue-400"></textarea>
                 </div>
 
-                <div class="flex justify-between">
-                    <button class="flex gap-1 items-center border-2 border-red-500 rounded-xl w-32 justify-center text-red-500 hover:bg-red-500 hover:text-white transition duration-300 font-medium" @click="editEvent = false">
+                <div class="flex gap-3 justify-between">
+                    <button class="flex gap-1 items-center border-2 border-red-500 rounded-xl w-32 justify-center text-red-500 hover:bg-red-500 hover:text-white transition duration-300 font-medium" @click="editMemo = false">
                         <x-heroicon-o-x-circle class="w-5 h-5"/>
                         Cancel
                     </button>
                     
-                    <button type="submit" class="flex gap-1 items-center bg-blue-500 text-white font-medium w-32 py-1 justify-center rounded-xl active:scale-95 transition duration-300" @click="editEvent = false">
+                    <button type="submit" class="flex gap-1 items-center bg-blue-500 text-white font-medium w-32 py-1 justify-center rounded-xl active:scale-95 transition duration-300" @click="editMemo = false">
                         <x-heroicon-o-check class="w-5 h-5"/>
                         Save
                     </button>

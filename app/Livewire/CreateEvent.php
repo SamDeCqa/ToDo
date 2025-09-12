@@ -17,9 +17,9 @@ class CreateEvent extends Component
 
     protected $rules = [
         'name' => 'required|string',
-        'starts' => 'required|date',
-        'ends' => 'required|date',
-        'location' => 'string',
+        'starts' => 'required|date|after_or_equal:today',
+        'ends' => 'nullable|date|after_or_equal:starts',
+        'location' => 'nullable|string',
         'description' => 'required|string',
     ];
 
@@ -38,6 +38,10 @@ class CreateEvent extends Component
 
         session()->flash('success', 'Event Created!');
 
+        return redirect()->route('tasks');
+    }
+
+    public function back() {
         return redirect()->route('tasks');
     }
     
